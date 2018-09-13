@@ -1,0 +1,77 @@
+import { configure, shallow } from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import Counter, { IDispatchProps, IStateProps } from "../Counter";
+
+configure({ adapter: new Adapter() });
+
+describe("Counter", () => {
+  it("rendering", () => {
+    const props: IStateProps & IDispatchProps = {
+      loading: false,
+      num: 123,
+      onDecrementAsync: (num: number) => undefined,
+      onIncrementAsync: (num: number) => undefined
+    };
+    const wrapper = shallow(<Counter {...props} />);
+    expect(
+      wrapper
+        .find("p")
+        .at(0)
+        .prop("children")
+    ).toBe("");
+    expect(
+      wrapper
+        .find("p")
+        .at(1)
+        .prop("children")
+    ).toBe("count: 123");
+  });
+
+  it("rendering in loadding...", () => {
+    const props: IStateProps & IDispatchProps = {
+      loading: true,
+      num: 234,
+      onDecrementAsync: (num: number) => undefined,
+      onIncrementAsync: (num: number) => undefined
+    };
+    const wrapper = shallow(<Counter {...props} />);
+    expect(
+      wrapper
+        .find("p")
+        .at(0)
+        .prop("children")
+    ).toBe("Loading...");
+    expect(
+      wrapper
+        .find("p")
+        .at(1)
+        .prop("children")
+    ).toBe("count: 234");
+  });
+
+  it("click", () => {
+    const props: IStateProps & IDispatchProps = {
+      loading: false,
+      num: 123,
+      onDecrementAsync: (num: number) => undefined,
+      onIncrementAsync: (num: number) => undefined
+    };
+
+    jest.spyOn(props, "onIncrementAsync");
+    jest.spyOn(props, "onDecrementAsync");
+
+    const wrapper = shallow(<Counter {...props} />);
+    wrapper
+      .find("button")
+      .at(0)
+      .simulate("click");
+    wrapper
+      .find("button")
+      .at(1)
+      .simulate("click");
+
+    expect(props.onIncrementAsync).toHaveBeenCalledWith(3);
+    expect(props.onDecrementAsync).toHaveBeenCalledWith(3);
+  });
+});
