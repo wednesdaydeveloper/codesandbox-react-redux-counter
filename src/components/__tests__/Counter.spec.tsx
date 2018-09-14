@@ -26,6 +26,18 @@ describe("Counter", () => {
         .at(1)
         .prop("children")
     ).toBe("count: 123");
+    expect(
+      wrapper
+        .find("button")
+        .at(0)
+        .prop("disabled")
+    ).toBe(false);
+    expect(
+      wrapper
+        .find("button")
+        .at(1)
+        .prop("disabled")
+    ).toBe(false);
   });
 
   it("rendering in loadding...", () => {
@@ -48,6 +60,24 @@ describe("Counter", () => {
         .at(1)
         .prop("children")
     ).toBe("count: 234");
+    expect(
+      wrapper
+        .find("button")
+        .at(0)
+        .prop("disabled")
+    ).toBe(true);
+    expect(
+      wrapper
+        .find("button")
+        .at(0)
+        .prop("disabled")
+    ).toBe(true);
+    expect(
+      wrapper
+        .find("button")
+        .at(1)
+        .prop("disabled")
+    ).toBe(true);
   });
 
   it("click", () => {

@@ -4,14 +4,14 @@ import Counter, { IDispatchProps, IStateProps } from "../components/Counter";
 import { decrementAsync, incrementAsync } from "../actions";
 import { ICounterState } from "../reducers";
 
-function mapStateToProps(state: ICounterState): IStateProps {
+export function mapStateToProps(state: ICounterState): IStateProps {
   return {
     loading: state.loading,
     num: state.num
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action>): IDispatchProps {
+export function mapDispatchToProps(dispatch: Dispatch<Action>): IDispatchProps {
   return {
     onDecrementAsync: (num: number) => dispatch(decrementAsync(num)),
     onIncrementAsync: (num: number) => dispatch(incrementAsync(num))
