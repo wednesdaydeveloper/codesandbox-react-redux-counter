@@ -1,13 +1,13 @@
 import { createElement } from "react";
 import * as Adapter from "enzyme-adapter-react-16";
 import { configure, shallow, ShallowWrapper } from "enzyme";
-import configureMockStore, { MockStoreCreator } from 'redux-mock-store';
 import CounterContainer, {
   mapDispatchToProps,
   mapStateToProps
 } from "../Counter";
 import { DECREMENT_ASYNC, INCREMENT_ASYNC } from "../../actions";
 import { ICounterState } from "../../reducers";
+import configureMockStore from 'redux-mock-store';
 
 configure({ adapter: new Adapter() });
 
